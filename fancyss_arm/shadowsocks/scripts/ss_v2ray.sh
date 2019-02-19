@@ -38,7 +38,7 @@ get_latest_version(){
 			update_now v$V2VERSION
 		else
 			V2RAY_LOCAL_VER=`/koolshare/bin/v2ray -version 2>/dev/null | head -n 1 | cut -d " " -f2`
-			V2RAY_LOCAL_DATE=`/koolshare/bin/v2ray -version 2>/dev/null | head -n 1 | cut -d " " -f5`
+			V2RAY_LOCAL_DATE=`/koolshare/bin/v2ray -version 2>/dev/null | head -n 1 | cut -d " " -f4`
 			[ -n "$V2RAY_LOCAL_VER" ] && dbus set ss_basic_v2ray_version="$V2RAY_LOCAL_VER"
 			[ -n "$V2RAY_LOCAL_DATE" ] && dbus set ss_basic_v2ray_date="$V2RAY_LOCAL_DATE"
 			echo_date "V2Ray已安装版本已经是最新，退出更新程序!"
@@ -140,7 +140,6 @@ update_now(){
 	if [ "$md5sum_ok=1" ] && [ "$v2ray_ok=1" ] && [ "$v2ctl_ok=1" ];then
 		check_md5sum
 	else
-		echo_date "目前还没有任何备用服务器！"
 		echo_date "使用备用服务器下载..."
 		update_now_backup $1
 	fi
